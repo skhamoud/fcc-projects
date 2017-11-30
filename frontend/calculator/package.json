@@ -1,0 +1,13 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "Build a Calculator challenge from FCC",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -o -p 3000 -a localhost"
+  },
+  "keywords": ["fcc", "calculator"],
+  "author": "Hamoud",
+  "license": "ISC",
+  "dependencies": {}
+}
