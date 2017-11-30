@@ -1,0 +1,14 @@
+.container_home-search-btn {
+  padding-top: 25vh;
+}
+
+.search-btn_home {
+  animation: hover infinite 2s ease-in-out alternate-reverse;
+  left: 2vw;
+  position: absolute;
+  top: 25vh;
+  width: 30vh;
+  @media (min-width: 820px) {
+    left: 18vw;
+  }
+}

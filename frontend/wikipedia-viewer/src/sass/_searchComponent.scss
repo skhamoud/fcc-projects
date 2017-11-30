@@ -1,0 +1,49 @@
+.searchbox{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  &.visible{
+    display: block}
+}
+.search-input{
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 1px;
+  border-bottom: solid 2px $lighter-accent;
+  outline: none;
+  color: $lighter-accent;
+  text-shadow: 0 0 0 $secondary;
+  -webkit-text-fill-color: transparent;
+  width: 80%;
+  height: initial;
+  font-size: 2rem;
+  margin-top: 45vh;
+  padding-bottom: 4px;
+  &:-webkit-input-placeholder {color: darken($secondary,10%)};
+  &:-moz-placeholder {color: darken($secondary, 10%)};
+  &:-ms-input-placeholder {color: darken($secondary, 10%)};
+  &:focus {
+    border: none;
+    border-bottom: solid 2px $lighter-accent;
+  }
+}
+.modal-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.6);
+}
+.search-btn {
+  cursor: pointer;
+}
+.random-btn{
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}

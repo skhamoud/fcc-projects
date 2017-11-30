@@ -1,0 +1,225 @@
+// @import "base";
+// @import "media";
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    color: #3f3f37;
+    font-size: 16px;
+    font-family: 'amaranth' , sans-serif;
+}
+.group:after {
+    /*clearfix*/
+    content: "";
+    display: table;
+    clear: both;
+}
+.hero {
+    background: #22333B;
+    padding: 3rem 2rem;
+    color: #F0EDF2;
+}
+.hero h2 {
+    color: #F0EDF2;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.hero-content {
+    text-align: center;
+}
+.hero-img img {
+    max-width: 70%;
+}
+.hero-text {
+    display: block;
+    padding: 20px;
+}
+.hidden {
+    display: none;
+}
+.videos {
+    padding: 1.5rem;
+    text-align: center;
+}
+.videos h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.lectures {
+    max-width: 992px;
+    margin: 0 auto;
+}
+.lectures .video-name {
+    position: relative;
+    cursor: pointer;
+    margin: 15px auto;
+    padding: 15px 15px 15px 40px;
+    max-width: 18rem;
+}
+.lectures .video-name:hover {
+    box-shadow: 10px 10px 50px #3f3f37;
+    left: 15px;
+    transition: all 0.3s;
+}
+.vid-icon {
+    display: inline-block;
+    background: #696969;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    left: 4px;
+    border-radius: 3px;
+}
+.vid-icon:after {
+    content: '';
+    position: absolute;
+    border: 5px solid transparent;
+    border-left: 5px solid #F0EDF2;
+    top: 25%;
+    left: 38%;
+}
+.note {
+    margin-top: 10px;
+    display: block;
+    padding: 10px;
+    border-radius: 3px;
+    background: #c4a3ff;
+    background: rgba(156, 100, 255, 0.53);
+}
+.modl-close {
+    opacity: 0;
+}
+.iframe-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+}
+.iframe-container:before {
+    content: '';
+    position: absolute;
+    background: black;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.6;
+}
+.iframe-container iframe {
+    position: fixed;
+    top: 15%;
+    left: 3%;
+    width: 90vw;
+    height: 50vw;
+    border: 3px solid white;
+    border-radius: 8px;
+}
+.buttons {
+    margin: auto;
+}
+.buttons .button {
+    width: 100%;
+    max-width: 260px;
+    border: 1px solid #4A306D;
+    display: block;
+    padding: 0.8rem;
+    margin: 1rem auto;
+    text-align: center;
+    text-decoration: none;
+    color: #4A306D;
+    border-radius: 30px;
+}
+.buttons .button i {
+    margin-left: 0;
+}
+.buttons .button:hover i {
+    visibility: visible;
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+/* ========= Media Queries==============*/
+@media (min-width: 768px) {
+    .hero {
+        padding-top: 20px;
+        font-size: 1.4em;
+        min-height: 100vh;
+    }
+    .hero h1 {
+        margin-bottom: 40px;
+    }
+    .hero-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .hero-img img {
+        max-width: 65vh;
+    }
+    .hero-text {
+        padding: 40px;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    .videos {
+        padding-top: 2rem;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        align-content: space-around;
+        // background: #E0E0E0;
+    }
+    .videos .container {
+        max-width: 50%;
+    }
+    .modl-close {
+        color: #F0EDF2;
+        position: fixed;
+        top: 4%;
+        right: 14%;
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        font-weight: normal;
+        opacity: 0.8;
+        z-index: 6;
+        cursor: pointer;
+    }
+    .iframe-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 3;
+    }
+    .iframe-container:before {
+        content: '';
+        position: absolute;
+        background: black;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0.6;
+    }
+    .iframe-container iframe {
+        position: fixed;
+        top: 10%;
+        left: 17%;
+        width: 65vw;
+        height: 37vw;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+    }
+    .buttons .button {
+        margin: 40px 30px;
+        display: inline-block;
+    }
+}

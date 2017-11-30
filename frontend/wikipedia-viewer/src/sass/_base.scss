@@ -1,0 +1,38 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+.App {
+  text-align: center;
+}
+.hidden{ display: none;}
+.visible{ display: block;}
+
+.btn {
+  color: white;
+  background: $accent;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0,0,0, .6);
+  &:hover{
+    background: lighten($accent,10%) ;
+  }
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+
+@keyframes hover {
+  from { transform: translate(0, 0); }
+  to { transform: translate(0, 2rem); }
+}

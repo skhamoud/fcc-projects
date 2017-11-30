@@ -1,0 +1,14 @@
+.not-found {
+  max-width: 90vw;
+  margin: 100px auto;
+  padding: 20vh 20px;
+  // color: white;
+  background: lighten($lighter-accent, 20%);
+  border-radius: 3px ;
+  a {
+    padding: 8px 20px ;
+    border: 1px solid $accent;
+    border-radius: 3px;
+    margin: 50px 0;
+  }
+}

@@ -1,0 +1,155 @@
+$blackish: #3f3f37;
+$white: #F0EDF2;
+$purple: #4A306D;
+$blue-ish: #22333B;
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	padding: 0;
+	color: $blackish;
+	font-size: 16px;
+	font-family: 'Amaranth', sans-serif;
+}
+.container {
+	padding: 0 1.5rem;
+}
+
+// clearfix
+.group:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.hero {
+	background: $blue-ish;
+	padding: 3rem 2rem;
+	color: $white;
+	h2 {
+		color: $white;
+		text-align: center;
+		margin-bottom: 60px;
+	}
+	&-flex {
+		text-align: center;
+	}
+	&-img {
+		img {
+			max-width: 70%;
+		}
+	}
+	&-text {
+		display: block;
+		padding: 20px;
+	}
+}
+//==========Videos section========
+.hidden {
+	display: none;
+}
+.videos {
+	text-align: center;
+	h2 {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+}
+.lectures {
+	max-width: 992px;
+	margin: 0 auto;
+	.video-name {
+		position: relative;
+		cursor: pointer;
+		margin: 15px auto;
+		padding: 15px 15px 15px 40px;
+		max-width: 18rem;
+		&:hover {
+			box-shadow: 1px 3px 23px 0 $blackish;
+			margin-top: 1.2rem;
+			transition: all 0.2s;
+		}
+	}
+}
+.vid-icon {
+	display: inline-block;
+	background: #696969;
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	left: 4px;
+	border-radius: 3px;
+	&:after {
+		content: '';
+		position: absolute;
+		border: 5px solid transparent;
+		border-left: 5px solid $white;
+		top: 25%;
+		left: 38%;
+	}
+}
+.note {
+	width: 100%;
+	margin-top : 10px;
+	display:block;
+	padding:10px;
+	border-radius:3px;
+	background : rgba(156, 100, 255, 0.53);
+}
+.modl-close {
+	opacity: 0;
+}
+.iframe-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 3;
+	// pointer-events: none;
+	&:before {
+		content: '';
+		position: absolute;
+		background: black;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		opacity: 0.6;
+	}
+	iframe {
+		position: fixed;
+		top: 15%;
+		left: 3%;
+		width: 90vw;
+		height: 50vw;
+		border: 3px solid white;
+		border-radius: 8px;
+	}
+}
+.buttons {
+	margin: 40px auto;
+	.button {
+		width: 100%;
+		max-width: 260px;
+		border: 1px solid #4A306D;
+		display: block;
+		padding: 0.8rem;
+		margin: 1rem auto;
+		text-align: center;
+		text-decoration: none;
+		color: $purple;
+		border-radius: 50px;
+		// max-width: 250px;
+		i {
+			margin-left: 0;
+		}
+		&:hover {
+			i {
+				visibility: visible;
+				margin-left: 5px;
+				transition: all 0.3s;
+			}
+		}
+	}
+}

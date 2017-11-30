@@ -1,0 +1,42 @@
+.articles {
+  padding: 10px;
+  position: relative;
+  h1 {
+    text-align: left;
+    color: $primary;
+
+    @media(min-width: 800px) {
+      text-align: center;
+    }
+  }
+}
+.search-btn_articles{
+  width: 3em;
+  position: absolute;
+  top:  4vh;
+  right: 20px;
+}
+.articles-ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 3vw;
+  @media (min-width: 850px) {
+    padding: 0 20vw;
+  }
+}
+.article {
+  box-shadow: 0 2px 4px $shadow-1;
+  margin-top: 35px;
+  text-align: left;
+}
+.article-title {
+  background: $secondary;
+  color: $accent;
+  margin: 0;
+  padding: 10px 15px;
+  text-align: left;
+}
+.article-extract {
+  margin: 0;
+  padding: 20px;
+}

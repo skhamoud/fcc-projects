@@ -1,0 +1,90 @@
+@media (min-width:768px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .hero {
+        padding-top: 20px;
+        font-size: 1.4em;
+        min-height: 100vh;
+        h1 {
+            margin-bottom: 40px;
+        }
+        &-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-img {
+            img {
+                max-width: 55vh;
+            }
+        }
+        &-text {
+            padding: 40px;
+        }
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    // 	======== videos section=========
+    .videos {
+        padding-top: 2rem;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        align-content: space-around;
+        .container {
+            max-width: 50%;
+        }
+        .lectures {}
+    }
+    .modl-close {
+        color: $white;
+        position: fixed;
+        top: 4%;
+        right: 14%;
+        font-family: sans-serif;
+        // display: block;
+        font-size: 1.5rem;
+        font-weight: normal;
+        opacity: 0.8;
+        z-index: 6;
+        cursor: pointer;
+    }
+    .iframe-container {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 3;
+        // pointer-events: none;
+        &:before {
+            content: '';
+            position: absolute;
+            background: black;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.6;
+        }
+        iframe {
+            position: fixed;
+            top: 10%;
+            left: 17%;
+            width: 65vw;
+            height: 37vw;
+        }
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        .button {
+            margin: 40px 30px;
+            display: inline-block;
+        }
+    }
+}
