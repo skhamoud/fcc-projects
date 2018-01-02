@@ -1,25 +1,25 @@
 /** State for keeping up with everything, view for Dom related stuff */
 const state = {
-    input: "",
-    isFirstPart: true,
-    p1: "",
-    p2: "",
-    sign: "",
-    answer: ""
-  },
-  view = {
-    inputScreen: document.querySelector(".inputScreenResult"),
-    inputScreenOperand: document.querySelector(".inputScreenOperand"),
-    keypad: document.querySelector(".keypad"),
-    digits: document.querySelector(".digits")
-  };
+  input: "",
+  isFirstPart: true,
+  p1: "",
+  p2: "",
+  sign: "",
+  answer: ""
+};
+const view = {
+  inputScreen: document.querySelector(".inputScreenResult"),
+  inputScreenOperand: document.querySelector(".inputScreenOperand"),
+  keypad: document.querySelector(".keypad"),
+  digits: document.querySelector(".digits")
+};
 
 setupListeners();
 
 function setupListeners() {
   document.addEventListener("keydown", e => {
     // input  sign
-    if (/[\+\-*\/]/.test(e.key)) {
+    if (/[\+\-\*\/]/.test(e.key)) {
       handleSignInput(e.key);
     } else if (/[0-9]/.test(e.key)) {
       // input next digit
@@ -76,7 +76,7 @@ function handleSignInput(sign) {
 }
 
 /**
- * processes input 
+ * processes input
  * => result
  */
 function processInput() {
