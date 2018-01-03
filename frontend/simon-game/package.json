@@ -1,0 +1,20 @@
+{
+  "name": "simon-game",
+  "version": "1.0.0",
+  "description": "Build an app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/obYBjE.",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.6",
+    "style-loader": "^0.19.1"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}

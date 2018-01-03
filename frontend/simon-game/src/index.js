@@ -1,3 +1,5 @@
+import './style.css';
+
 /** 
  * Set Array of Sequence seqArr , and round = 1
  * check for user's input 
