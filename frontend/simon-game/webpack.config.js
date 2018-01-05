@@ -11,17 +11,17 @@ module.exports = {
     compress: true,
     port: 5000,
     open: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
-      // {
-      //   test: /\.(png|svg|jpg|gif)$/,
-      //   use: ["file-loader"]
-      // }
-    ]
   }
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.css$/,
+  //       use: ["style-loader", "css-loader"]
+  //     }
+  //     // {
+  //     //   test: /\.(png|svg|jpg|gif)$/,
+  //     //   use: ["file-loader"]
+  //     // }
+  //   ]
+  // }
 };
