@@ -1,250 +1,150 @@
-import './style.css';
-
-/** 
- * Set Array of Sequence seqArr , and round = 1
- * check for user's input 
- *    if(CheckInput()) {
- *      round++
- *      repeat line 3 
- *    }
- *    else Notify and replay() last sequence 
- * 
- */
-window.onload = start;
+// State
 let machineSequence = [];
-let humanSequence = [];
+let playerSequence = [];
 let btnClicked;
 let count;
-/* Start the game */
-function start() {
-  document.querySelector("#strict").addEventListener("click", playStrict);
-  document.querySelector("#start").addEventListener("click", main);
-}
+let failCount = 0;
+const colors = ["red", "green", "blue", "yellow"];
+const audios = {
+  blue: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
+  red: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
+  green: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
+  yellow: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
+};
 
-/* Driver function for the game */
+window.onload = function main() {
+  document.querySelector("#start").addEventListener("click", start);
+  // document.querySelector("#strict").addEventListener("click", playStrict);
+  document.querySelector(".game").addEventListener("click", handleBtnClick);
+};
 
-function main() {
-  console.log("Game started , main ()...");
-  if (machineSequence.length > 0 /* empty sequence if it has contents */)
-    machineSequence = [];
-  if (humanSequence.length > 0) humanSequence = [];
-  count = 0;
-  document.querySelector(".count").innerHTML = "0"; //reset the count
-  next(machineSequence);
-
-  btnClicked = document.querySelector(".game");
-  //   console.log("btnClicked" + btnClicked.id);
-  btnClicked.addEventListener("click", function(event) {
-    // console.log(
-    //   "className: " + event.target.className + " Id " + event.target.id
-    // );
-    if (event.target.className === "child") {
-      humanSequence.push(event.target.id);
-      humanPlay(event.target.id); /* flush and play music */
-
-      //   console.log("event.target.id " + event.target.id);
-      //   console.log("After loggin id");
-      //   console.log("human Sequence" + humanSequence);
-      //only compare if there are equal number of elements in human and machine sequence
-      if (humanSequence.length == machineSequence.length) {
-        if (compare()) {
-          humanSequence = [];
-          next(machineSequence);
-        } else {
-          console.log("error, aborting...");
+/** Handles all logic when a button is clicked . */
+function handleBtnClick(event) {
+  if (event.target.className === "child") {
+    playerSequence.push(event.target.id);
+    // trigger logic only after track stops , can get confusing otherwise for user
+    playPiece(event.target.id).then(() => {
+      if (!sequenceMatches()) {
+        if (failCount === 3) {
+          fail();
           return;
         }
+        playerSequence = [];
+        failCount++;
+        alert("You pushed wrong Button , try again!");
+        playMachine();
       }
-      //   else {
-      //     // console.log("machine sequence if all fails: " + machineSequence);
-      //     machinePlay(machineSequence);
-      //     btnClicked = document.querySelector(".game");
-      //     btnClicked.addEventListener("click", function(event) {
-      //       if (event.target.className === "child") {
-      //         humanSequence.push(event.target.id);
-      //         humanPlay(event.target.id); /* flush and play music */
 
-      //         // console.log("second btn clicked.target.id " + event.target.id);
-      //         // console.log("After loggin id");
-      //       }
-      //     });
-      // return;
-      //   }
-    }
-  });
+      // compare at equal sequences if user nails it then trigger next color in random sequence
+      if (playerSequence.length === machineSequence.length && sequenceMatches()) {
+        count++;
+        document.querySelector(".count").innerHTML = count;
+
+        if (hasWon(count)) {
+          alert("You won!");
+          start();
+        }
+        playerSequence = [];
+        next();
+      }
+    });
+  }
 }
 
-//compare sequence and check if player won
-function compare() {
-  //   console.log("human sequence: " + humanSequence);
-  //   console.log("machineSequence:" + machineSequence);
-  if (compareSequence(machineSequence)) {
-    count++;
-    document.querySelector(".count").innerHTML = count;
+function start() {
+  resetState();
+  next();
+}
 
-    if (checkIfWon(count)) {
-      alert("You won!");
-    }
+function resetState() {
+  machineSequence = [];
+  playerSequence = [];
+  count = failCount = 0;
+  document.querySelector(".count").innerHTML = "0";
+  return;
+}
 
-    // alert("you're winning");
-  } else if (!compareSequence(machineSequence)) {
-    document.querySelector("#youLost").innerHTML =
-      "You pressed the wrong button. Try again!";
+function fail() {
+  alert("You Lost, Restarting!");
+  start();
+  return;
+}
 
-    return false;
-  }
-  //   console.log("Finally, you won!");
-
-  return true;
+/** Compare player sequence and machine sequence for maching button presses
+ * @returns {boolean} returns `false` if user's last input is different than
+ * last machine input .
+ */
+function sequenceMatches() {
+  const lastInput = playerSequence.length - 1;
+  return playerSequence[lastInput] === machineSequence[lastInput];
 }
 
 /**
  * pick random color, push it to seqArr , then play (seqArr)
  */
-function next(sequence) {
-  let colors = ["red", "green", "blue", "yellow"],
-    randomColor = colors[Math.floor(Math.random() * 4)];
-
-  sequence.push(randomColor);
-  console.log("inside next: sequence: " + sequence.toString());
-  machinePlay(sequence);
+function next() {
+  const randomColor = colors[Math.floor(Math.random() * 4)];
+  machineSequence.push(randomColor);
+  playMachine();
 }
 
-/* flash an element and play music */
-function flashElement(element, buttonName) {
-  console.log("button: ", buttonName);
-  //   element.style.backgroundColor = "white";
-  //   element.style.backgroundColor = element.id;
-  // element.classList.add(buttonName);
-  // setTimeout(function() {  // internal setTimeout is making this take too long and async
-  //     element.classList.remove(buttonName);}, 500);   // adjust to 500 to
-}
+// function playStrictDriver() {
+//   document.querySelector("#strict").addEventListener("click", playStrict);
+// }
 
-/* play the human sequence */
-function humanPlay(color) {
-  let colorId = "#" + color;
-  let music;
-  let element = document.querySelector(colorId);
-  if (color == "green") {
-    flashElement(element, "buttonGreen");
-    music = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
-    //music.play();
-  } else if (color == "yellow") {
-    flashElement(element, "buttonYellow");
-    music = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
-    //music.play();
-  } else if (color == "blue") {
-    flashElement(element, "buttonBlue");
-    music = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
-    // music.play();
-  } else if (color == "red") {
-    flashElement(element, "buttonRed");
-    music = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
-    //music.play();
-  }
+// function playStrict() {
+//   resetState();
+//   var strictBtn = document.querySelector(".game");
+//   document.querySelector(".count").innerHTML = "0";
+//   count = 0;
 
-  music.play();
-}
+//   strictBtn.addEventListener("click", function(event) {
+//     if (event.target.className === "child") {
+//       playerSequence.push(event.target.id);
+//       playPiece(event.target.id);
 
-function playStrictDriver() {
-  document.querySelector("#strict").addEventListener("click", playStrict);
-}
+//       //only compare if there are equal number of elements in player and machine sequence
+//       if (playerSequence.length == machineSequence.length) {
+//         if (compare()) {
+//           playerSequence = [];
+//           next();
+//         } else {
+//           alert("You Pushed Wrong Button, try again");
+//           resetState();
+//         }
+//       }
+//     }
+//   });
+// }
 
-function playStrict() {
-  restart();
-  var strictBtn = document.querySelector(".game");
-  document.querySelector(".count").innerHTML = "0";
-  count = 0;
-
-  strictBtn.addEventListener("click", function(event) {
-    // console.log(
-    //   "className: " + event.target.className + " Id " + event.target.id
-    // );
-    if (event.target.className === "child") {
-      humanSequence.push(event.target.id);
-      humanPlay(event.target.id); /* flush and play music */
-
-      //only compare if there are equal number of elements in human and machine sequence
-      if (humanSequence.length == machineSequence.length) {
-        if (compare()) {
-          humanSequence = [];
-          next(machineSequence);
-        }
-      } else {
-        // console.log(
-        //   "You pressed the wrong button. Game will restart. " + machineSequence
-        // );
-        next(machineSequence);
-      }
-    }
-  });
-}
 /**
- * loop through the machine Sequence 
- * for each color playSound(color) and flash()
- * 
+ * Recursively play the sequence
  */
-function machinePlay(sequence) {
-  let audio = {
-    blue: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
-    red: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
-    green: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
-    yellow: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
-  };
-  for (let i = 0; i < sequence.length; i++) {
-    let element;
-    let colorID = "#" + sequence[i];
-    element = document.querySelector(colorID);
-    if (sequence[i] == "green") {
-      flashElement(element, "buttonGreen");
-      let music = new Audio(audio[i]);
-      music.play();
-    } else if (sequence[i] == "blue") {
-      flashElement(element, "buttonBlue");
-      let music = new Audio(audio[i]);
-      music.play();
-    } else if (sequence[i] == "yellow") {
-      flashElement(element, "buttonYellow");
-      let music = new Audio(audio[i]);
-      music.play();
-    } else {
-      flashElement(element, "buttonRed");
-      let music = new Audio(audio[i]);
-      music.play();
-    }
-  }
+function playMachine(k = 0) {
+  if (k === machineSequence.length) return;
+  playPiece(machineSequence[k]).then(() => playMachine(k + 1));
 }
 
-/* Compare human sequence and machine sequence for maching button presses */
-function compareSequence() {
-  for (let i = 0; i < machineSequence.length; i++) {
-    if (machineSequence[i] != humanSequence[i]) {
-      return false;
-    } else {
-      humanPlay(humanSequence[i]);
-    }
-  }
-  return true;
+function hasWon(count) {
+  return count === 5;
 }
 
-function restart() {
-  humanSequence = machineSequence = [];
-  count = 0;
-}
-
-/* Initialize arrays so they are all empty in preparation for next sequence */
-function initArrays(humanSeq, machineSeq) {
-  machineSeq = humanSeq = [];
-}
-
-function checkIfWon(count) {
-  return count === 20;
-}
-
-function playPiece(audio) {
-  return new Promise((resolve, reject) => {
-    const piece = new Audio(audio);
+/** Plays sound and flashes for relevant color
+ * the flash takes 0.2 seconds and returns a `Promise` that resolves when
+ * sound track ends playing.
+ * @param {String} color one of {['green','red','yellow','blue']}
+ */
+function playPiece(color) {
+  return new Promise(resolve => {
+    const element = document.querySelector("#" + color);
+    element.style.opacity = 0.6;
+    setTimeout(() => {
+      element.style.opacity = 1;
+    }, 200);
+    const piece = new Audio(audios[color]);
     piece.play();
-    piece.addEventListener("ended", () => resolve());
+    piece.addEventListener("ended", () => {
+      resolve();
+    });
   });
 }
