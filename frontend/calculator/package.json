@@ -4,10 +4,17 @@
   "description": "Build a Calculator challenge from FCC",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -o -p 3000 -a localhost"
+    "start": "webpack-dev-server"
   },
-  "keywords": ["fcc", "calculator"],
+  "keywords": [
+    "fcc",
+    "calculator"
+  ],
   "author": "Hamoud",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.7"
+  }
 }
