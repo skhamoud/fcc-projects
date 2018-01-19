@@ -62,6 +62,16 @@ function setupListeners() {
 function handleDigitInput(digit) {
   // reset expression and answer if this digit is first in expression
   if (answer) answer = expression = '';
+  // remove 0 if first in number  (to avoid weird eval behavior)
+  if (
+    expression.startsWith('0') &&
+    expression.charAt(1) !== '.' &&
+    digit !== '.'
+  ) {
+    const arr = expression.split('');
+    arr.shift();
+    expression = arr.join('');
+  }
   let lastNumber = expression.split(/[*+/-]/).pop();
   // skip if incoming is a comma & num already has one
   if (digit === '.' && /\./.test(lastNumber)) return;
@@ -114,11 +124,11 @@ function processExpression() {
     warn('Remove sign at the start!');
     return;
   }
+
   answer = expression ? eval(expression) : 0;
   if (!Number.isInteger(answer)) answer = Number(answer).toFixed(2);
   updateScreen(answer);
   updateScreenHistory(answer);
-  // expression = '';
 }
 
 /** Clears all */
@@ -148,6 +158,9 @@ function warn(warning) {
 function logInput() {
   console.log(JSON.stringify({ expression, answer }, null, 1));
 }
+
+// TODO: clear on hitting CE , deploy on surge .
+// edge case when eval('06546') outputs 3430 ????
 
 // ========= Custom Parser ===========================
 /** My own parser for arithmetic simple operations */
