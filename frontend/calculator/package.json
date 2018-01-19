@@ -12,7 +12,9 @@
   ],
   "author": "Hamoud",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "mathjs-expression-parser": "^1.0.0"
+  },
   "devDependencies": {
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.7"

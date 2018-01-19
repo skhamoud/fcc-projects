@@ -4,6 +4,7 @@
 <head>
   <title>Calculator</title>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="style.css" rel="stylesheet">
 </head>
@@ -11,16 +12,17 @@
 <body>
   <div class="calculator">
     <div class="screen">
-      <span class="inputScreenResult"></span>
-      <span class="inputScreenOperand"></span>
+      <div class="screenContainer">
+        <span class="inputScreenResult"></span>
+        <span class="inputScreenHistory"></span>
+      </div>
     </div>
 
     <div class="keypad">
       <div class="row">
-        <button type="button" value="AC" class="clear-all">AC</button>
+        <button type="button" value="AC" class="AC">AC</button>
         <button type="button" value="CE" class="CE">CE</button>
-        <button type="button" value="%" class="sign">%</button>
-        <button type="button" value="/" class="sign">/</button>
+        <button type="button" id="divide" value="/" class="sign">/</button>
       </div>
       <div class="row">
         <button type="button" value="7" class="digit">7</button>
